@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>কারু ছায়া | Kaaru Chhaya</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#faf8f3;color:#29251f}
+header{background:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+.logo{font-size:25px;font-weight:bold;color:#754b35}
+nav a{color:#333;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{background:linear-gradient(120deg,#3d3027,#987252);color:white;padding:90px 8%;text-align:center}
+.hero h1{font-size:42px;margin-bottom:15px}
+.hero p{font-size:17px;line-height:1.8}
+.hero button,.buy{background:#c89b66;color:#fff;border:0;padding:13px 25px;margin-top:25px;cursor:pointer;border-radius:4px}
+section{padding:55px 7%}
+h2{text-align:center;font-size:28px;margin-bottom:30px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.card{background:white;border-radius:9px;overflow:hidden;box-shadow:0 3px 15px #0000000c;text-align:center;padding-bottom:20px}
+.product-img{height:175px;background:#e9dfd2;display:flex;align-items:center;justify-content:center;font-size:65px}
+.card h3{margin:15px 0 8px}
+.card p{color:#87634a}
+.buy{margin-top:12px;padding:10px 20px}
+.about{text-align:center;background:#eee6da;line-height:2}
+footer{background:#30271f;color:white;text-align:center;padding:30px 15px;line-height:2}
+@media(max-width:600px){
+header{flex-direction:column;gap:15px}
+nav a{margin:0 7px}
+.hero h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">কারু ছায়া</div>
+<nav>
+<a href="#home">হোম</a>
+<a href="#products">পণ্য</a>
+<a href="#about">আমাদের সম্পর্কে</a>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<h1>শিল্পের ছোঁয়ায় জীবনের গল্প</h1>
+<p>ঐতিহ্য, সৌন্দর্য ও সৃজনশীলতার এক অনন্য ঠিকানা।<br>বাংলার কারুশিল্পকে ভালোবাসুন।</p>
+<button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">পণ্য দেখুন</button>
+</div>
+
+<section id="products">
+<h2>আমাদের সংগ্রহ</h2>
+<div class="products">
+
+<div class="card">
+<div class="product-img">👜</div>
+<h3>হাতের তৈরি ব্যাগ</h3>
+<p>৳ ৮৫০</p>
+<button class="buy" onclick="order('হাতের তৈরি ব্যাগ')">অর্ডার করুন</button>
+</div>
+
+<div class="card">
+<div class="product-img">🏺</div>
+<h3>মাটির কারুশিল্প</h3>
+<p>৳ ৫৫০</p>
+<button class="buy" onclick="order('মাটির কারুশিল্প')">অর্ডার করুন</button>
+</div>
+
+<div class="card">
+<div class="product-img">🧣</div>
+<h3>ঐতিহ্যবাহী পোশাক</h3>
+<p>৳ ১২০০</p>
+<button class="buy" onclick="order('ঐতিহ্যবাহী পোশাক')">অর্ডার করুন</button>
+</div>
+
+<div class="card">
+<div class="product-img">🎨</div>
+<h3>হাতের তৈরি শিল্পকর্ম</h3>
+<p>৳ ৭৫০</p>
+<button class="buy" onclick="order('হাতের তৈরি শিল্পকর্ম')">অর্ডার করুন</button>
+</div>
+
+</div>
+</section>
+
+<section class="about" id="about">
+<h2>কারু ছায়া সম্পর্কে</h2>
+<p>কারু ছায়া এমন একটি উদ্যোগ যেখানে বাংলার ঐতিহ্যবাহী শিল্প, কারুশিল্প ও সৃজনশীলতাকে তুলে ধরা হয়।</p>
+<p>আমাদের লক্ষ্য দেশীয় শিল্পীদের কাজ সবার সামনে তুলে ধরা।</p>
+</section>
+
+<footer>
+<h3>কারু ছায়া</h3>
+<p>বাংলার শিল্প, বাংলার ঐতিহ্য।</p>
+<p>© 2026 Kaaru Chhaya. All Rights Reserved.</p>
+</footer>
+
+<script>
+function order(product){
+alert("আপনি "+product+" নির্বাচন করেছেন। অর্ডারের জন্য আমাদের সঙ্গে যোগাযোগ করুন।");
+}
+</script>
+
+</body>
+</html>
