@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karuchaya | Online Store</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#faf9f6;color:#242424}
+header{background:#fff;padding:17px 6%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #0001}
+.logo{font-size:25px;font-weight:bold;letter-spacing:2px;color:#263d35}
+nav{display:flex;gap:20px;align-items:center}
+nav a{color:#333;text-decoration:none;font-size:14px}
+.actions button{border:0;background:none;font-size:20px;margin-left:12px;cursor:pointer}
+.hero{min-height:390px;padding:70px 8%;display:flex;align-items:center;background:linear-gradient(90deg,#172d27dd,#172d2755),url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400') center/cover;color:white}
+.hero h1{font-size:clamp(35px,6vw,60px);margin:15px 0}
+.hero p{font-size:16px;line-height:1.8;max-width:450px}
+.btn{display:inline-block;background:#b99565;color:white;padding:13px 25px;border:0;margin-top:22px;cursor:pointer;text-decoration:none}
+.section{padding:55px 6%}
+.heading{text-align:center;margin-bottom:30px}
+.heading h2{font-size:28px;color:#263d35}
+.heading p{color:#888;margin-top:8px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.category{padding:35px 10px;text-align:center;background:#eae8df;cursor:pointer}
+.category h3{font-size:21px;color:#263d35}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:white;position:relative;box-shadow:0 3px 15px #0000000a}
+.card img{width:100%;height:270px;object-fit:cover}
+.card-info{padding:16px}
+.card-info h3{font-size:17px;margin-bottom:8px}
+.price{font-weight:bold;color:#9a7446}
+.card button{border:0;background:#263d35;color:white;padding:10px 13px;margin-top:12px;cursor:pointer}
+.heart{position:absolute;right:12px;top:12px;background:white!important;color:#222!important;border-radius:50%;font-size:19px;padding:8px!important}
+.search{display:block;width:100%;max-width:450px;margin:0 auto 30px;padding:13px;border:1px solid #ddd;font-size:15px}
+.about{background:#263d35;color:white;text-align:center;padding:55px 8%;line-height:1.9}
+footer{background:#17251f;color:#ddd;text-align:center;padding:30px 15px;line-height:2}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:15px}
+.modal-box{background:white;padding:25px;width:100%;max-width:430px;max-height:85vh;overflow:auto}
+.modal-box h2{margin-bottom:18px;color:#263d35}
+.modal-box input,.modal-box textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd}
+.modal-box button{padding:12px 18px;background:#263d35;color:white;border:0;cursor:pointer;margin-top:10px}
+.close{float:right;background:#eee!important;color:#333!important}
+#cartItems{line-height:2}
+.empty{text-align:center;padding:30px;color:#888}
+@media(max-width:700px){
+ header{padding:14px 4%}
+ nav{gap:10px}
+ nav a{font-size:12px}
+ .logo{font-size:20px}
+ .actions button{font-size:17px;margin-left:5px}
+ .hero{min-height:340px;padding:45px 7%}
+ .products{grid-template-columns:repeat(2,1fr);gap:12px}
+ .card img{height:190px}
+ .card-info{padding:11px}
+ .card-info h3{font-size:14px}
+ .categories{grid-template-columns:1fr}
+ .section{padding:40px 4%}
+}
+@media(max-width:380px){
+ .products{grid-template-columns:1fr}
+ .card img{height:260px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">KARUCHAYA.</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#shop">Shop</a>
+<a href="#about">About</a>
+</nav>
+
+<div class="actions">
+<button onclick="openModal('wishlist')">♡</button>
+<button onclick="openModal('cart')">🛒 <span id="count">0</span></button>
+<button onclick="openModal('login')">♙</button>
+</div>
+</header>
+
+<section class="hero" id="home">
+<div>
+<p>WELCOME TO KARUCHAYA</p>
+<h1>Style That<br>Speaks For You.</h1>
+<p>Discover your style with our beautiful and modern fashion collection.</p>
+<a href="#shop" class="btn">EXPLORE COLLECTION</a>
+</div>
+</section>
+
+<section class="section">
+<div class="heading">
+<h2>Explore Categories</h2>
+<p>Find your favourite collection</p>
+</div>
+
+<div class="categories">
+<div class="category" onclick="filterCategory('Women')">
+<h3>Women's Fashion</h3>
+<p>Elegant & Beautiful</p>
+</div>
+<div class="category" onclick="filterCategory('Men')">
+<h3>Men's Fashion</h3>
+<p>Classic & Modern</p>
+</div>
+<div class="category" onclick="filterCategory('All')">
+<h3>All Collection</h3>
+<p>Discover Everything</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="shop">
+<div class="heading">
+<h2>Our Collection</h2>
+<p>Discover something special</p>
+</div>
+
+<input class="search" id="search" placeholder="Search your favourite product..." oninput="renderProducts()">
+
+<div class="products" id="products"></div>
+</section>
+
+<section class="about" id="about">
+<h2>About Karuchaya</h2>
+<p>
+Karuchaya is a fashion store concept created for people
+who love simplicity, elegance and modern style.
+We believe every style tells a story.
+</p>
+</section>
+
+<footer>
+<h2>KARUCHAYA.</h2>
+<p>Style • Elegance • Simplicity</p>
+<p>Contact: karuchaya@example.com</p>
+<p>© 2026 Karuchaya. All Rights Reserved.</p>
+</footer>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<button class="close" onclick="closeModal()">✕ Close</button>
+<div id="modalContent"></div>
+</div>
+</div>
+
+<script>
+const items=[
+{id:1,name:"Elegant Women's Dress",price:1250,category:"Women",image:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600"},
+{id:2,name:"Classic Men's Shirt",price:850,category:"Men",image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600"},
+{id:3,name:"Modern Fashion Outfit",price:1450,category:"Women",image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600"},
+{id:4,name:"Casual Men's Outfit",price:1100,category:"Men",image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600"},
+{id:5,name:"Beautiful Summer Dress",price:1350,category:"Women",image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600"},
+{id:6,name:"Premium Men's Wear",price:1600,category:"Men",image:"https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600"}
+];
+
+let cart=[];
+let wishlist=[];
+let category="All";
+
+function renderProducts(){
+const search=document.getElementById("search").value.toLowerCase();
+const filtered=items.filter(p=>
+(category==="All"||p.category===category)&&
+p.name.toLowerCase().includes(search)
+);
+
+document.getElementById("products").innerHTML=
+filtered.length?filtered.map(p=>`
+<div class="card">
+<button class="heart" onclick="toggleWish(${p.id})">
+${wishlist.includes(p.id)?"♥":"♡"}
+</button>
+<img src="${p.image}" alt="${p.name}">
+<div class="card-info">
+<h3>${p.name}</h3>
+<p class="price">৳ ${p.price}</p>
+<button onclick="addCart(${p.id})">Add to Cart</button>
+</div>
+</div>
+`).join(""):'<p class="empty">No products found.</p>';
+}
+
+function filterCategory(c){
+category=c;
+document.getElementById("search").value="";
+renderProducts();
+document.getElementById("shop").scrollIntoView();
+}
+
+function addCart(id){
+cart.push(id);
+updateCount();
+alert("Product added to cart!");
+}
+
+function updateCount(){
+document.getElementById("count").innerText=cart.length;
+}
+
+function toggleWish(id){
+if(wishlist.includes(id)){
+wishlist=wishlist.filter(x=>x!==id);
+}else{
+wishlist.push(id);
+}
+renderProducts();
+}
+
+function openModal(type){
+const box=document.getElementById("modalContent");
+
+if(type==="cart"){
+box.innerHTML=`
+<h2>Shopping Cart</h2>
+<div id="cartItems">
+${cart.length?cart.map((id,i)=>{
+let p=items.find(x=>x.id===id);
+return `${p.name} — ৳${p.price}
+<button onclick="removeCart(${i})">Remove</button><br>`;
+}).join(""):'<p class="empty">Your cart is empty.</p>'}
+</div>
+<h3>Total: ৳${cart.reduce((s,id)=>s+items.find(p=>p.id===id).price,0)}</h3>
+<button onclick="checkout()">Place Order</button>`;
+}
+
+if(type==="wishlist"){
+box.innerHTML=`
+<h2>My Wishlist ♡</h2>
+${wishlist.length?wishlist.map(id=>{
+let p=items.find(x=>x.id===id);
+return `<p>${p.name} — ৳${p.price}</p>`;
+}).join(""):'<p class="empty">No favourite products yet.</p>'}`;
+}
+
+if(type==="login"){
+box.innerHTML=`
+<h2>Welcome Back</h2>
+<input placeholder="Your Email" type="email">
+<input placeholder="Password" type="password">
+<button onclick="alert('This is a demo login. No account was created.')">Login</button>
+<p>Demo account interface</p>`;
+}
+
+document.getElementById("modal").style.display="flex";
+}
+
+function removeCart(index){
+cart.splice(index,1);
+updateCount();
+openModal("cart");
+}
+
+function checkout(){
+if(!cart.length){
+alert("Your cart is empty!");
+return;
+}
+document.getElementById("modalContent").innerHTML=`
+<h2>Order Form</h2>
+<p>Total: ৳${cart.reduce((s,id)=>s+items.find(p=>p.id===id).price,0)}</p>
+<form onsubmit="submitOrder(event)">
+<input required placeholder="Your Name">
+<input required placeholder="Phone Number" type="tel">
+<textarea required placeholder="Delivery Address"></textarea>
+<button type="submit">Submit Demo Order</button>
+</form>
+<p>Demo only: This form does not send a real order.</p>`;
+}
+
+function submitOrder(e){
+e.preventDefault();
+alert("Thank you! This is a demo order. No real order was sent.");
+cart=[];
+updateCount();
+closeModal();
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+renderProducts();
+</script>
+
+</body>
+</html>
