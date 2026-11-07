@@ -34,7 +34,7 @@
 <div class="nav-actions"><button class="icon-btn" onclick="focusSearch()" aria-label="সার্চ">⌕</button><button class="icon-btn" onclick="openWishlist()" aria-label="পছন্দের তালিকা">♡</button><button class="icon-btn" onclick="openCart()" aria-label="কার্ট">🛒<span class="count" id="cartCount">০</span></button><button class="menu-btn" onclick="toggleNav()" aria-label="মেনু">☰</button></div>
 </div></header>
 <main>
-<section class="hero" id="home"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">WELCOME TO KARU CHAYA</div><h1>ঐতিহ্যের বুননে<br><span>মনের ছোঁয়া।</span></h1><p>শাড়ি, কুর্তি, পাঞ্জাবি ও নানা ঐতিহ্যবাহী পোশাকে খুঁজে নিন আপনার নিজস্ব রুচির প্রকাশ। প্রতিটি নকশায় থাকুক যত্ন, সৌন্দর্য আর কারুশিল্পের গল্প।</p><div class="hero-actions"><a class="btn" href="#shop">ডিজাইন দেখুন →</a><a class="btn btn-outline" href="https://wa.me/8801926863314" target="_blank" rel="noopener">WhatsApp-এ কথা বলুন</a></div></div><div class="hero-visual"><div class="hero-frame"><img src="images/saree1.jpg" alt="কারু ছায়ার পোশাকের নমুনা" onerror="imageFallback(this)"></div><div class="hero-note">হাতে তৈরি, ভালোবাসায় মোড়া</div></div></div></section>
+<section class="hero" id="home"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">WELCOME TO KARUCHAYA</div><h1>ঐতিহ্যের বুননে<br><span>মনের ছোঁয়া।</span></h1><p>শাড়ি, কুর্তি, পাঞ্জাবি ও নানা ঐতিহ্যবাহী পোশাকে খুঁজে নিন আপনার নিজস্ব রুচির প্রকাশ। প্রতিটি নকশায় থাকুক যত্ন, সৌন্দর্য আর কারুশিল্পের গল্প।</p><div class="hero-actions"><a class="btn" href="#shop">ডিজাইন দেখুন →</a><a class="btn btn-outline" href="https://wa.me/8801926863314" target="_blank" rel="noopener">WhatsApp-এ কথা বলুন</a></div></div><div class="hero-visual"><div class="hero-frame"><img src="images/saree1.jpg" alt="কারু ছায়ার পোশাকের নমুনা" onerror="imageFallback(this)"></div><div class="hero-note">হাতে তৈরি, ভালোবাসায় মোড়া</div></div></div></section>
 <section class="trust"><div class="container trust-grid"><div class="trust-item"><span class="trust-icon">✋</span><span><b>নিপুণ হাতের কাজ</b><small>যত্নে তৈরি নকশা</small></span></div><div class="trust-item"><span class="trust-icon">✿</span><span><b>পছন্দমতো ডিজাইন</b><small>রং ও মাপ বেছে নিন</small></span></div><div class="trust-item"><span class="trust-icon">🎨</span><span><b>ঐতিহ্য ও আধুনিকতা</b><small>নিজস্ব রুচির প্রকাশ</small></span></div><div class="trust-item"><span class="trust-icon">🚚</span><span><b>সারা দেশে ডেলিভারি</b><small>অর্ডার অনুযায়ী</small></span></div></div></section>
 <section class="section" id="collection"><div class="container"><div class="section-head"><div class="eyebrow">OUR COLLECTION</div><h2>আমাদের কালেকশন</h2><div class="ornament"></div><p>আপনার পছন্দের বিভাগ থেকে ডিজাইন বেছে নিন</p></div><div class="categories" id="categoryGrid"></div></div></section>
 <section class="section shop-section" id="shop"><div class="container"><div class="section-head"><div class="eyebrow">HANDPICKED DESIGNS</div><h2>আমাদের ডিজাইন</h2><div class="ornament"></div><p>ছবিতে চাপ দিয়ে বিস্তারিত দেখুন। ছবিগুলো নমুনা; রং, মাপ, দাম ও তৈরির সময় অর্ডারের আগে নিশ্চিত করুন।</p></div><div class="shop-tools"><div class="chips" id="categoryChips"></div><input class="search-input" id="searchInput" type="search" placeholder="ডিজাইন খুঁজুন…" oninput="renderProducts()" aria-label="ডিজাইন খুঁজুন"></div><div class="product-grid" id="productGrid"></div></div></section>
@@ -51,11 +51,38 @@ const WHATSAPP='8801926863314';
 const STORAGE={cart:'karuchaya_cart_v3',wishlist:'karuchaya_wishlist_v3'};
 /* আগের সংস্করণে সেভ হওয়া পুরনো প্রোডাক্ট ও অর্ডার (গ্রাহকের তথ্যসহ) মুছে ফেলা */
 try{localStorage.removeItem('karuchaya_products_v3');localStorage.removeItem('karuchaya_orders_v3');}catch(e){}
-const categories={Saree:{label:'শাড়ি',en:'SAREE',prefix:'saree',cover:'images/saree1.jpg'},Salwar:{label:'সেলোয়ার-কামিজ',en:'SALWAR KAMEEZ',prefix:'salwar',cover:'images/salwar1.jpg'},Kurti:{label:'কুর্তি',en:'KURTI',prefix:'kurti',cover:'images/kurti1.jpg'},Lehenga:{label:'লেহেঙ্গা',en:'LEHENGA',prefix:'lehenga',cover:'images/lehenga1.jpg'},Panjabi:{label:'পাঞ্জাবি',en:'PANJABI',prefix:'panjabi',cover:'images/panjabi1.jpg'}};
+const categories={
+  Saree:{label:'শাড়ি',en:'SAREE',cover:'images/saree1.jpg'},
+  Salwar:{label:'সেলোয়ার-কামিজ',en:'SALWAR KAMEEZ',cover:'images/salwar-kameez1.jpg'},
+  Kurti:{label:'কুর্তি',en:'KURTI',cover:'images/kurti1.jpg'},
+  Lehenga:{label:'লেহেঙ্গা',en:'LEHENGA',cover:'images/lehenga2.jpg'},
+  Panjabi:{label:'পাঞ্জাবি',en:'PANJABI',cover:'images/panjabi-white.jpg'}
+};
 const bn=n=>String(n).replace(/[0-9]/g,d=>'০১২৩৪৫৬৭৮৯'[Number(d)]);
-/* প্রোডাক্ট তালিকা সবসময় কোড থেকে আসে; দাম বসাতে চাইলে নিচের price-এ লিখুন */
-const products=[];let nextId=1;
-Object.keys(categories).forEach(key=>{for(let i=1;i<=5;i++)products.push({id:nextId++,category:key,name:categories[key].label+' ডিজাইন '+bn(i),price:0,image:'images/'+categories[key].prefix+i+'.jpg',description:'এটি একটি ডিজাইন নমুনা। পছন্দমতো রং ও মাপে তৈরির বিষয়ে WhatsApp-এ কথা বলুন।'});});
+/* প্রোডাক্ট তালিকা: শুধু যেসব ছবি আপলোড করা আছে সেগুলোই এখানে। নতুন ছবি যোগ করতে এখানে নতুন লাইন বসান। */
+const productData=[
+  {category:'Saree',name:'শাড়ি ডিজাইন ০১ (মেরুন)',image:'images/saree1.jpg'},
+  {category:'Saree',name:'শাড়ি ডিজাইন ০২ (সাদা)',image:'images/saree2.jpg'},
+  {category:'Saree',name:'শাড়ি ডিজাইন ০৪ (নেভি ব্লু)',image:'images/saree4.jpg'},
+  {category:'Salwar',name:'সেলোয়ার-কামিজ ডিজাইন ০১',image:'images/salwar-kameez1.jpg'},
+  {category:'Salwar',name:'সেলোয়ার-কামিজ ডিজাইন ০২',image:'images/salwar-kameez2.jpg'},
+  {category:'Salwar',name:'সেলোয়ার-কামিজ ডিজাইন ০৩',image:'images/salwar-kameez3.jpg'},
+  {category:'Salwar',name:'সেলোয়ার-কামিজ ডিজাইন ০৪',image:'images/salwar-kameez4.jpg'},
+  {category:'Salwar',name:'সেলোয়ার-কামিজ ডিজাইন ০৫',image:'images/salwar-kameez5.jpg'},
+  {category:'Kurti',name:'কুর্তি ডিজাইন ০১',image:'images/kurti1.jpg'},
+  {category:'Kurti',name:'কুর্তি ডিজাইন ০২',image:'images/kurti2.jpg'},
+  {category:'Kurti',name:'কুর্তি ডিজাইন ০৪',image:'images/kurti4.jpg'},
+  {category:'Kurti',name:'কুর্তি ডিজাইন ০৫',image:'images/kurti5.jpg'},
+  {category:'Lehenga',name:'লেহেঙ্গা ডিজাইন ০২',image:'images/lehenga2.jpg'},
+  {category:'Lehenga',name:'লেহেঙ্গা ডিজাইন ০৩',image:'images/lehenga3.jpg'},
+  {category:'Lehenga',name:'লেহেঙ্গা ডিজাইন ০৪',image:'images/lehenga4.jpg'},
+  {category:'Lehenga',name:'লেহেঙ্গা ডিজাইন ০৫',image:'images/lehenga5.jpg'},
+  {category:'Panjabi',name:'পাঞ্জাবি — সাদা',image:'images/panjabi-white.jpg'},
+  {category:'Panjabi',name:'পাঞ্জাবি — নেভি',image:'images/panjabi-navy.jpg'},
+  {category:'Panjabi',name:'পাঞ্জাবি — সবুজ',image:'images/panjabi-green.jpg'},
+  {category:'Panjabi',name:'পাঞ্জাবি — মেরুন',image:'images/panjabi-maroon.jpg'}
+];
+const products=productData.map((p,i)=>({id:i+1,price:0,description:'এটি একটি ডিজাইন নমুনা। পছন্দমতো রং ও মাপে তৈরির বিষয়ে WhatsApp-এ কথা বলুন।',...p}));
 function load(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return Array.isArray(v)?v:fallback}catch(e){return fallback}}
 const validId=id=>products.some(p=>p.id===id);
 let cart=load(STORAGE.cart,[]).filter(x=>x&&validId(x.id)&&Number(x.qty)>0);
