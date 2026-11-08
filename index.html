@@ -30,7 +30,7 @@
 </div></section>
 <section class="section" id="collection"><div class="container"><div class="heading"><small>OUR COLLECTION</small><h2>আমাদের কালেকশন</h2><p>আপনার পছন্দের বিভাগ থেকে ডিজাইন বেছে নিন</p></div><div class="categories" id="categoryGrid"></div></div></section>
 <section class="section shop" id="shop"><div class="container"><div class="heading"><small>HANDPICKED DESIGNS</small><h2>আমাদের ডিজাইন</h2><p>ছবিগুলো নমুনা। রং, মাপ, দাম ও তৈরির সময় অর্ডারের আগে নিশ্চিত করুন।</p></div><div class="tools"><div class="filters" id="filters"></div><input id="search" class="search" type="search" placeholder="ডিজাইন খুঁজুন…" oninput="renderProducts()"></div><div class="products" id="productGrid"></div></div></section>
-<section class="section story" id="story"><div class="container story-grid"><img src="images/kurti1.jpg" alt="হাতের কাজের পোশাক"><div><small style="color:#dfbd84;letter-spacing:2px">OUR STORY</small><h2>কারু ছায়া সম্পর্কে</h2><p>কারু ছায়া—হাতের কাজ ও ঐতিহ্যবাহী নকশার প্রতি ভালোবাসা থেকে তৈরি একটি উদ্যোগ। আমাদের লক্ষ্য হলো নকশার সৌন্দর্য, কারিগরের যত্ন এবং আপনার পছন্দকে একসঙ্গে তুলে ধরা। পছন্দমতো রং ও মাপে তৈরির বিষয়ে আমাদের সঙ্গে কথা বলুন।</p></div></div></section>
+<section class="section story" id="story"><div class="container story-grid"><img src="kurti1.jpg" alt="হাতের কাজের পোশাক"><div><small style="color:#dfbd84;letter-spacing:2px">OUR STORY</small><h2>কারু ছায়া সম্পর্কে</h2><p>কারু ছায়া—হাতের কাজ ও ঐতিহ্যবাহী নকশার প্রতি ভালোবাসা থেকে তৈরি একটি উদ্যোগ। আমাদের লক্ষ্য হলো নকশার সৌন্দর্য, কারিগরের যত্ন এবং আপনার পছন্দকে একসঙ্গে তুলে ধরা। পছন্দমতো রং ও মাপে তৈরির বিষয়ে আমাদের সঙ্গে কথা বলুন।</p></div></div></section>
 <section class="contact" id="contact"><div class="container"><h2>আপনার পছন্দের নকশা খুঁজছেন?</h2><p>ডিজাইন নম্বর, পছন্দের রং ও মাপ জানিয়ে আমাদের সঙ্গে যোগাযোগ করুন।</p><a class="btn" href="https://wa.me/8801926863314" target="_blank" rel="noopener">WhatsApp-এ মেসেজ করুন</a></div></section>
 </main><footer class="footer">WhatsApp: +880 1926-863314<br>© <span id="year"></span> কারু ছায়া। সর্বস্বত্ব সংরক্ষিত।</footer>
 <a class="wa" href="https://wa.me/8801926863314" target="_blank" rel="noopener">💬 WhatsApp</a>
@@ -39,14 +39,14 @@
 const wa='8801926863314';
 const categories={
  Saree:{label:'শাড়ি',files:['saree1.jpg','saree2.jpg','saree4.jpg']},
- Salwar:{label:'সেলোয়ার-কামিজ',files:['salwar-kameez1.jpg','salwar-kameez2.jpg','salwar-kameez3.jpg','salwar-kameez4.jpg','salwar-kameez5.jpg']},
- Kurti:{label:'কুর্তি',files:['kurti1.jpg','kurti2.jpg','kurti4.jpg','kurti5.jpg']},
- Lehenga:{label:'লেহেঙ্গা',files:['lehenga2.jpg','lehenga3.jpg','lehenga4.jpg','lehenga5.jpg']},
- Panjabi:{label:'পাঞ্জাবি',files:['panjabi-green.jpg','panjabi-maroon.jpg','panjabi-navy.jpg','panjabi-white.jpg']}
+ Salwar:{label:'সেলোয়ার-কামিজ',files:['salwar-kameez1.jpg','salwar-kameez2.jpg','salwar-kameez3.jpg','salwar-kameez4.jpg']},
+ Kurti:{label:'কুর্তি',files:['kurti1.jpg','kurti2.jpg','kurti5.jpg']},
+ Lehenga:{label:'লেহেঙ্গা',files:['lehenga4.jpg','lehenga5.jpg']},
+ Panjabi:{label:'পাঞ্জাবি',files:['panjabi-navy.jpg']}
 };
-const products=Object.entries(categories).flatMap(([key,c])=>c.files.map((file,i)=>({id:key+'-'+i,category:key,name:c.label+' — ডিজাইন '+(i+1),image:'images/'+file})));
+const products=Object.entries(categories).flatMap(([key,c])=>c.files.map((file,i)=>({id:key+'-'+i,category:key,name:c.label+' — ডিজাইন '+(i+1),image:file})));
 let active='All';
-function renderCategories(){document.getElementById('categoryGrid').innerHTML=Object.entries(categories).map(([key,c])=>`<button class="category" onclick="selectCategory('${key}')"><img src="images/${c.files[0]}" alt="${c.label}" loading="lazy"><b>${c.label}</b></button>`).join('');}
+function renderCategories(){document.getElementById('categoryGrid').innerHTML=Object.entries(categories).map(([key,c])=>`<button class="category" onclick="selectCategory('${key}')"><img src="${c.files[0]}" alt="${c.label}" loading="lazy"><b>${c.label}</b></button>`).join('');}
 function renderFilters(){document.getElementById('filters').innerHTML=[['All','সব ডিজাইন'],...Object.entries(categories).map(([k,c])=>[k,c.label])].map(([k,l])=>`<button class="chip ${active===k?'active':''}" onclick="selectCategory('${k}')">${l}</button>`).join('');}
 function renderProducts(){const q=document.getElementById('search').value.trim().toLowerCase();const list=products.filter(p=>(active==='All'||p.category===active)&&p.name.toLowerCase().includes(q));document.getElementById('productGrid').innerHTML=list.length?list.map(p=>`<article class="product"><img src="${p.image}" alt="${p.name}" loading="lazy"><div class="product-info"><h3>${p.name}</h3><p>দাম জানতে মেসেজ করুন</p><button onclick="order('${p.id}')">WhatsApp-এ অর্ডার</button><button class="alt" onclick="window.open('${p.image}','_blank')">ছবি বড় করে দেখুন</button></div></article>`).join(''):'<div class="empty">কোনো ডিজাইন পাওয়া যায়নি।</div>';}
 function selectCategory(k){active=k;renderFilters();renderProducts();document.getElementById('shop').scrollIntoView({behavior:'smooth'});}
