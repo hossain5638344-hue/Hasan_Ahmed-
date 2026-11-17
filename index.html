@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Karu Chhaya (কারু ছায়া): handmade sarees, kurtis, salwar-kameez, panjabis and lehenga, made to order.">
+<title>Karu Chhaya · কারু ছায়া</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230F3D2E'/%3E%3Ccircle cx='16' cy='14' r='6' fill='%23C9A227'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#0F3D2E; --m:#6B1E2A; --c:#F5EBDD; --c2:#fbf6ec;
+  --gold:#C9A227; --ink:#1d1812; --mute:#6f6255;
+  --serif:"Cormorant Garamond",Georgia,serif; --bn:"Noto Serif Bengali",Georgia,serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--bn);background:var(--c);color:var(--ink);line-height:1.8;overflow-x:hidden}
+a{color:inherit}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Intro curtain */
+#intro{position:fixed;inset:0;z-index:100;background:var(--g);display:flex;align-items:center;justify-content:center;transition:transform 1.1s var(--ease) .15s}
+#intro.done{transform:translateY(-100%)}
+#intro .mark{font-family:var(--serif);color:var(--c);font-size:clamp(2rem,6vw,3.4rem);letter-spacing:.04em;opacity:0;animation:introIn 1.1s var(--ease) .1s forwards;text-align:center}
+#intro .mark small{display:block;font-family:var(--bn);font-size:.9rem;color:var(--gold);margin-top:6px;letter-spacing:.02em}
+@keyframes introIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:30;transition:background .5s var(--ease),box-shadow .5s var(--ease)}
+.nav.solid{background:rgba(245,235,221,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(15,61,46,.12)}
+.nav-in{max-width:1240px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;gap:20px}
+.brand{font-family:var(--serif);font-size:1.6rem;font-weight:600;text-decoration:none;color:var(--c);white-space:nowrap;transition:color .5s}
+.brand small{font-family:var(--bn);font-size:.8rem;margin-left:8px;color:var(--gold)}
+.nav.solid .brand{color:var(--g)}
+.nav.solid .brand small{color:var(--m)}
+.menu{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;font-size:.88rem;color:var(--c);transition:color .5s}
+.nav.solid .menu{color:var(--ink)}
+.menu::-webkit-scrollbar{display:none}
+.menu a{text-decoration:none;white-space:nowrap;padding:4px 0;position:relative}
+.menu a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.menu a:hover::after,.menu a.on::after{transform:scaleX(1)}
+.cart-pill{flex:none;background:var(--gold);color:var(--g);border:0;padding:9px 16px;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600;transition:transform .3s var(--ease)}
+.cart-pill:hover{transform:translateY(-2px)}
+.cart-pill b{display:inline-block;min-width:20px;margin-left:4px;background:var(--g);color:var(--c);border-radius:999px;padding:0 6px}
+
+/* Pages */
+.page{display:none}
+.page.on{display:block;animation:pageIn 1s var(--ease) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Scenes */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff6e6;padding:120px 24px 180px}
+.hero.dawn{background:linear-gradient(#22183a 0%,#7d3f5e 42%,#e9906f 74%,#f7cf9a 100%)}
+.hero.sunset{background:linear-gradient(#141f3c 0%,#5b2750 45%,#c0584b 78%,#f0a25c 100%)}
+.hero.day{background:linear-gradient(#7fb9d6 0%,#c9e4ee 60%,#f5ebdd 100%);color:var(--g)}
+.hero.noon{background:linear-gradient(#3f8fbd 0%,#9fd0dc 65%,#e8f1ea 100%);color:var(--g)}
+.hero.dusk{background:linear-gradient(#0b1d33 0%,#2e3566 50%,#7a5676 85%,#b07a7a 100%)}
+.hero.night{background:linear-gradient(#020809 0%,#071c26 55%,#0d3a46 100%)}
+.sky{position:absolute;inset:0;pointer-events:none}
+.orb{position:absolute;width:clamp(70px,9vw,120px);aspect-ratio:1;border-radius:50%;left:50%;bottom:44%;transform:translateX(-50%);transition:transform .2s linear}
+.orb.sun{background:radial-gradient(circle at 36% 34%,#fff8dc,#f6c46a 45%,#e8893a 80%);box-shadow:0 0 120px 30px rgba(255,190,110,.45)}
+.orb.moon{background:radial-gradient(circle at 36% 34%,#ffffff,#dfe5d6 60%,#b9c3b0);box-shadow:0 0 110px 25px rgba(220,235,255,.35)}
+.orb.rise{animation:rise 12s var(--ease) infinite alternate}
+.orb.set{animation:rise 12s var(--ease) infinite alternate-reverse}
+@keyframes rise{from{bottom:-8%}to{bottom:50%}}
+.haze{position:absolute;left:-10%;right:-10%;height:28%;bottom:18%;background:radial-gradient(ellipse at center,rgba(255,220,170,.35),transparent 70%);animation:haze 9s ease-in-out infinite alternate}
+@keyframes haze{from{opacity:.4}to{opacity:1}}
+.stars{position:absolute;inset:0;opacity:0;background-image:radial-gradient(1.6px 1.6px at 12% 20%,#fff,transparent),radial-gradient(1px 1px at 28% 12%,#fff,transparent),radial-gradient(2px 2px at 44% 26%,#fff,transparent),radial-gradient(1px 1px at 63% 8%,#fff,transparent),radial-gradient(1.6px 1.6px at 78% 22%,#fff,transparent),radial-gradient(1px 1px at 90% 34%,#fff,transparent),radial-gradient(1.4px 1.4px at 20% 46%,#fff,transparent),radial-gradient(1px 1px at 56% 40%,#fff,transparent);animation:twinkle 4.5s ease-in-out infinite alternate}
+.night .stars,.dusk .stars{opacity:1}
+@keyframes twinkle{from{opacity:.25}to{opacity:1}}
+.sea{position:absolute;left:0;right:0;bottom:0;height:110px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='110' viewBox='0 0 240 110'%3E%3Cpath d='M0 55 Q30 32 60 55 T120 55 T180 55 T240 55 V110 H0Z' fill='rgba(4,22,28,.9)'/%3E%3C/svg%3E") repeat-x 0 100%/240px 110px;animation:tide 11s linear infinite}
+.sea.l2{bottom:-10px;height:90px;opacity:.6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='90' viewBox='0 0 300 90'%3E%3Cpath d='M0 45 Q37 25 75 45 T150 45 T225 45 T300 45 V90 H0Z' fill='rgba(10,40,48,.7)'/%3E%3C/svg%3E");animation-duration:16s;animation-direction:reverse}
+.day .sea,.noon .sea{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='110' viewBox='0 0 240 110'%3E%3Cpath d='M0 55 Q30 32 60 55 T120 55 T180 55 T240 55 V110 H0Z' fill='rgba(15,61,46,.5)'/%3E%3C/svg%3E")}
+@keyframes tide{to{background-position:240px 100%}}
+.hero-in{position:relative;z-index:2;max-width:900px}
+.kicker{font-size:clamp(1rem,2vw,1.2rem);color:var(--gold)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.2rem,10vw,7.4rem);line-height:.98;letter-spacing:-.01em;margin:10px 0 6px}
+.hero .bn{font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:500}
+.hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.2vw,1.45rem);margin-top:14px;opacity:.92}
+.sway{display:inline-block;animation:sway 5s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;font-size:.8rem;letter-spacing:.04em;opacity:.8;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-cue i{width:1px;height:34px;background:currentColor;animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 30px;background:var(--g);color:var(--c);text-decoration:none;font-size:.95rem;border:1px solid var(--g);cursor:pointer;transition:background .45s var(--ease),color .45s var(--ease),transform .45s var(--ease)}
+.btn:hover{background:var(--m);border-color:var(--m);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.ghost:hover{background:var(--c);color:var(--g);border-color:var(--c)}
+
+/* Body */
+.sec{position:relative;max-width:1240px;margin:0 auto;padding:110px 24px}
+.sec.tight{padding-top:70px}
+.eyebrow-line{display:flex;align-items:center;gap:14px;color:var(--m);font-size:.95rem;margin-bottom:14px}
+.eyebrow-line::before{content:"";width:46px;height:1px;background:var(--gold)}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,4.4vw,3.2rem);line-height:1.1;color:var(--g);margin-bottom:18px}
+h3{font-family:var(--serif);font-weight:600;font-size:1.55rem;color:var(--g);line-height:1.2}
+.lead{font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.2vw,1.6rem);color:var(--m);max-width:44ch;margin-bottom:22px}
+p{max-width:64ch;margin-bottom:16px}
+.muted{color:var(--mute)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.cta-row{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* Category tiles */
+.cats{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:48px}
+.cat{position:relative;overflow:hidden;text-decoration:none;color:var(--c);min-height:300px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(160deg,var(--g),var(--m));transition:transform .7s var(--ease)}
+.cat:nth-child(1){grid-column:span 7;min-height:380px;background:linear-gradient(150deg,#7a2b38,#3b1420)}
+.cat:nth-child(2){grid-column:span 5;background:linear-gradient(170deg,#1d4f3e,var(--g))}
+.cat:nth-child(3){grid-column:span 4;background:linear-gradient(200deg,#174f3c,#082419)}
+.cat:nth-child(4){grid-column:span 4;background:linear-gradient(140deg,var(--m),#4a1520)}
+.cat:nth-child(5){grid-column:span 4;background:linear-gradient(180deg,#244d3c,#0a2a20)}
+.cat::before{content:"";position:absolute;inset:14px;border:1px solid rgba(201,162,39,.55);transition:inset .7s var(--ease),border-color .7s}
+.cat:hover{transform:translateY(-6px)}
+.cat:hover::before{inset:20px;border-color:var(--gold)}
+.cat .bn{font-size:1rem;color:var(--gold);margin-bottom:4px;position:relative}
+.cat h3{color:var(--c);font-size:clamp(1.8rem,3vw,2.4rem);position:relative}
+.cat .n{position:absolute;top:26px;right:30px;font-family:var(--serif);font-size:1rem;opacity:.7}
+
+/* Product cards */
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px;margin-top:44px}
+.pcard{background:var(--c2);border:1px solid rgba(15,61,46,.1);position:relative;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 26px 50px -30px rgba(15,61,46,.55)}
+.art{height:320px;position:relative;overflow:hidden;background:linear-gradient(145deg,var(--g),var(--m))}
+.art.v2{background:linear-gradient(200deg,var(--m),#2b0f18)}
+.art.v3{background:linear-gradient(120deg,#1d4f3e,var(--g) 60%,#0a2b20)}
+.art.v4{background:linear-gradient(160deg,#7a2b38,var(--m))}
+.art.v5{background:linear-gradient(180deg,#244d3c,#0a2a20)}
+.art::before{content:"";position:absolute;inset:16px;border:1px solid rgba(201,162,39,.6)}
+.art .motif{position:absolute;left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%) rotate(45deg);border:1px solid var(--gold);transition:transform 1.2s var(--ease)}
+.art .motif::after{content:"";position:absolute;inset:18px;background:var(--gold);opacity:.8}
+.pcard:hover .motif{transform:translate(-50%,-50%) rotate(225deg)}
+.art .tag{position:absolute;left:18px;bottom:16px;font-size:.78rem;color:var(--c);background:rgba(15,61,46,.7);padding:4px 10px}
+.pbody{padding:18px 20px 20px}
+.pbody .meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pbody .num{font-family:var(--serif);font-size:1.2rem;color:var(--g)}
+.pbody .bn{font-size:.85rem;color:var(--mute)}
+.pbody .row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.add{background:none;border:1px solid var(--g);color:var(--g);padding:8px 14px;cursor:pointer;font-size:.84rem;transition:all .4s var(--ease)}
+.add:hover{background:var(--g);color:var(--c)}
+.add.on{background:var(--gold);border-color:var(--gold);color:var(--g)}
+.wa-small{font-size:.82rem;color:var(--m);text-decoration:none;border-bottom:1px solid transparent}
+.wa-small:hover{border-color:var(--m)}
+
+/* Order tray */
+.tray{position:fixed;left:50%;bottom:18px;transform:translate(-50%,150%);z-index:40;width:min(680px,calc(100% - 24px));background:var(--g);color:var(--c);padding:18px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);transition:transform .8s var(--ease)}
+.tray.show{transform:translate(-50%,0)}
+.tray .info{font-size:.95rem}
+.tray .info b{color:var(--gold)}
+.tray select{background:transparent;border:1px solid rgba(245,235,221,.5);padding:9px 10px;color:var(--c)}
+.tray select option{color:var(--ink)}
+.tray .btn{background:var(--gold);color:var(--g);border-color:var(--gold)}
+.tray .btn:hover{background:var(--c);border-color:var(--c)}
+.tray .clear{background:none;border:0;color:var(--c);opacity:.7;cursor:pointer;font-size:.85rem;text-decoration:underline}
+
+/* Timeline */
+.timeline{list-style:none;margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.timeline::before{content:"";position:absolute;top:22px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),rgba(201,162,39,.2))}
+.timeline li{padding-right:24px;position:relative}
+.timeline .dot{width:45px;height:45px;border-radius:50%;background:var(--c);border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:1.2rem;color:var(--g);margin-bottom:22px;position:relative;z-index:1}
+.timeline h3{font-size:1.3rem;margin-bottom:8px}
+.timeline p{font-size:.95rem;color:var(--mute)}
+
+/* Dark band */
+.band{background:var(--g);color:var(--c)}
+.band .sec{padding:120px 24px;text-align:center}
+.quote-mark{font-family:var(--serif);font-size:6rem;line-height:.6;color:var(--gold)}
+.quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.3;max-width:24ch;margin:0 auto;color:var(--c)}
+
+/* Steps */
+.steps{list-style:none}
+.steps li{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(15,61,46,.14)}
+.steps li:last-child{border-bottom:1px solid rgba(15,61,46,.14)}
+.steps li > div:first-child{display:contents}
+.steps .n{font-family:var(--serif);font-size:2rem;color:var(--gold);line-height:1}
+.steps h3{margin-bottom:6px}
+.steps p{font-size:.98rem;color:var(--mute);margin:0}
+
+/* Contact */
+.contact-card{background:var(--c2);padding:44px;border-top:3px solid var(--gold)}
+.contact-line{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid rgba(15,61,46,.12)}
+.contact-line span:first-child{color:var(--mute);font-size:.9rem}
+.contact-line span:last-child{font-family:var(--serif);font-size:1.25rem;color:var(--g)}
+
+/* Footer */
+footer{background:#082419;color:var(--c);padding:70px 24px 30px}
+.foot{max-width:1240px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.foot .brand{color:var(--c);display:inline-block;margin-bottom:12px}
+.foot .brand small{color:var(--gold)}
+.foot p{color:rgba(245,235,221,.7);font-size:.95rem}
+.foot a{display:block;text-decoration:none;color:rgba(245,235,221,.8);font-size:.95rem;margin-bottom:8px}
+.foot a:hover{color:var(--gold)}
+.copy{max-width:1240px;margin:50px auto 0;padding-top:20px;border-top:1px solid rgba(245,235,221,.14);font-size:.82rem;color:rgba(245,235,221,.55);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .split{grid-template-columns:1fr;gap:44px}
+  .timeline{grid-template-columns:1fr 1fr;row-gap:44px}
+  .timeline::before{display:none}
+  .cat:nth-child(n){grid-column:span 12;min-height:260px}
+  .foot{grid-template-columns:1fr}
+  .menu{display:none}
+}
+@media (max-width:600px){
+  .sec{padding:80px 20px}
+  .contact-card{padding:28px 22px}
+  .steps li{grid-template-columns:52px 1fr}
+  .timeline{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true"><div class="mark">Karu Chhaya<small>কারু ছায়া · হাতের কাজ, মনের ছোঁয়া</small></div></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#home">Karu Chhaya<small>কারু ছায়া</small></a>
+    <nav class="menu" id="menu" aria-label="Main"></nav>
+    <button class="cart-pill" id="cartPill" type="button">Your list <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<div class="tray" id="tray" role="region" aria-label="Your order list">
+  <div class="info"><b id="trayCount">0</b> design(s) selected · <span id="trayList"></span></div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <select id="traySize" aria-label="Size">
+      <option>Size: Not sure</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>Custom</option>
+    </select>
+    <button class="btn" id="traySend" type="button">Send on WhatsApp</button>
+    <button class="clear" id="trayClear" type="button">Clear</button>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <div><a class="brand" href="#home">Karu Chhaya<small>কারু ছায়া</small></a>
+      <p>Handmade clothing for everyday and celebration, made to order with care.</p></div>
+    <div><a href="#sarees">Sarees</a><a href="#kurtis">Kurtis</a><a href="#salwar">Salwar-Kameez</a><a href="#panjabi">Panjabis</a><a href="#lehenga">Lehenga</a></div>
+    <div><a href="#craft">Our Craft</a><a href="#order">How to Order</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  </div>
+  <div class="copy"><span>© Karu Chhaya. All rights reserved.</span><span>Prices and production time are agreed on WhatsApp.</span></div>
+</footer>
+
+<script>
+const WA = "https://wa.me/8801926863314?text=";
+const wa = t => WA + encodeURIComponent(t);
+
+const PAGES = [
+  {id:"home",label:"Home"},{id:"sarees",label:"Sarees"},{id:"kurtis",label:"Kurtis"},
+  {id:"salwar",label:"Salwar-Kameez"},{id:"panjabi",label:"Panjabis"},{id:"lehenga",label:"Lehenga"},
+  {id:"craft",label:"Our Craft"},{id:"order",label:"How to Order"},{id:"about",label:"About"},{id:"contact",label:"Contact"}
+];
+
+const CATS = {
+  sarees:{bn:"শাড়ি",en:"Sarees",scene:["sunset","set"],sub:"Handwork that moves with you, from first light to last.",
+    text:"Every saree begins as a design poster and is finished by hand. Pick a design, tell us what you need, and we will make it to order."},
+  kurtis:{bn:"কুর্তি",en:"Kurtis",scene:["day","sun"],sub:"Everyday elegance, stitched by hand.",
+    text:"Light, comfortable kurtis with hand-finished embroidery. Choose a design and we will confirm the size and details on WhatsApp."},
+  salwar:{bn:"সালোয়ার কামিজ",en:"Salwar-Kameez",scene:["noon","sun"],sub:"Classic cuts with considered detail.",
+    text:"Each set is cut and finished to order, with the price and production time agreed with you directly."},
+  panjabi:{bn:"পাঞ্জাবি",en:"Panjabis",scene:["dusk","set"],sub:"A quiet, refined look for every occasion.",
+    text:"Hand-finished panjabis in our signature palette. Send us the design number you like and we will take it from there."},
+  lehenga:{bn:"লেহেঙ্গা",en:"Lehenga",scene:["night",""],sub:"Made for the evenings that matter.",
+    text:"Our lehenga designs take their time, with handwork finished to order. Ask us about any design number."}
+};
+const ARTS = ["","v2","v3","v4","v5"];
+
+/* Order list (in memory) */
+const picked = new Set();
+function refreshTray(){
+  const names = [...picked].map(s => { const [k,n] = s.split("-"); return `${CATS[k].en} ${n}`; });
+  document.getElementById("trayCount").textContent = picked.size;
+  document.getElementById("cartCount").textContent = picked.size;
+  document.getElementById("trayList").textContent = picked.size ? names.join(", ") : "pick designs to add them here";
+  document.getElementById("tray").classList.toggle("show", picked.size > 0);
+  document.querySelectorAll("[data-key]").forEach(b => {
+    const on = picked.has(b.dataset.key);
+    b.classList.toggle("on", on);
+    b.textContent = on ? "Added ✓" : "Add to list";
+  });
+}
+function toggleDesign(key){ picked.has(key) ? picked.delete(key) : picked.add(key); refreshTray(); }
+document.getElementById("trayClear").onclick = () => { picked.clear(); refreshTray(); };
+document.getElementById("cartPill").onclick = () => {
+  if (!picked.size) { location.hash = "#sarees"; return; }
+  document.getElementById("tray").scrollIntoView({behavior:"smooth", block:"nearest"});
+};
+document.getElementById("traySend").onclick = () => {
+  const size = document.getElementById("traySize").value;
+  const items = [...picked].map(s => { const [k,n] = s.split("-"); return `- ${CATS[k].en} design ${n}`; }).join("\n");
+  window.open(wa(`Hello Karu Chhaya, I'd like to order:\n${items}\nSize: ${size}`), "_blank", "noopener");
+};
+
+/* Builders */
+function hero(scene, title, sub, bn, kicker){
+  const [mood, obj] = scene;
+  let orb = "";
+  if (obj === "sun") orb = '<div class="orb sun"></div>';
+  else if (obj === "set") orb = '<div class="orb sun set"></div>';
+  else if (obj === "rise") orb = '<div class="orb sun rise"></div>';
+  else if (mood === "night") orb = '<div class="orb moon"></div>';
+  return `<section class="hero ${mood}">
+    <div class="sky"><div class="stars"></div>${orb}<div class="haze"></div></div>
+    <div class="hero-in">
+      ${kicker ? `<div class="kicker sway">${kicker}</div>` : ""}
+      <h1 class="sway-w">${title}</h1>
+      ${bn ? `<div class="bn sway-w">${bn}</div>` : ""}
+      ${sub ? `<p class="sub">${sub}</p>` : ""}
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><i></i></div>
+    <div class="sea"></div><div class="sea l2"></div>
+  </section>`;
+}
+
+function productCard(k, n){
+  const num = String(n).padStart(2,"0");
+  return `<article class="pcard reveal">
+    <div class="art ${ARTS[n-1]}"><div class="motif"></div><span class="tag">${CATS[k].en}</span></div>
+    <div class="pbody">
+      <div class="meta"><span class="num">Design ${num}</span><span class="bn">ডিজাইন নং- ${num}</span></div>
+      <div class="row">
+        <button class="add" data-key="${k}-${num}" type="button">Add to list</button>
+        <a class="wa-small" href="${wa(`Hello Karu Chhaya, I'd like to ask about ${CATS[k].en} design ${num}`)}" target="_blank" rel="noopener">Ask on WhatsApp</a>
+      </div>
+    </div>
+  </article>`;
+}
+
+function catPage(k){
+  const c = CATS[k];
+  const cards = [1,2,3,4,5].map(n => productCard(k,n)).join("");
+  return `${hero(c.scene, c.en, c.sub, c.bn, "Karu Chhaya · Collection")}
+  <section class="sec">
+    <div class="split">
+      <div class="reveal"><div class="eyebrow-line">${c.bn}</div><h2>${c.en}, made to order</h2><p class="lead">${c.sub}</p><p class="muted">${c.text}</p></div>
+      <div class="reveal" style="text-align:right"><a class="btn ghost" href="${wa(`Hello Karu Chhaya, I'd like to order ${c.en}`)}" target="_blank" rel="noopener">Order ${c.en} on WhatsApp</a></div>
+    </div>
+    <div class="products">${cards}</div>
+  </section>`;
+}
+
+const STATIC = {
+  home:{scene:["dawn","rise"],title:"Karu Chhaya",bn:"কারু ছায়া",sub:"হাতের কাজ, মনের ছোঁয়া",kicker:"Handmade clothing, made to order",
+    body:`
+    <section class="sec">
+      <div class="split">
+        <div class="reveal"><div class="eyebrow-line">Our promise</div>
+          <h2>Every thread placed by hand.</h2>
+          <p class="lead">Each piece begins as a design poster and is finished slowly, to order.</p>
+          <p class="muted">Karu Chhaya brings sarees, kurtis, salwar-kameez, panjabis and lehenga into one considered collection. Nothing is mass-produced, so every piece can be made to you.</p>
+          <div class="cta-row" style="justify-content:flex-start"><a class="btn" href="#sarees">Explore collections</a><a class="btn ghost" href="#order">How to order</a></div>
+        </div>
+        <div class="reveal"><div class="art" style="height:440px"><div class="motif" style="width:140px;height:140px"></div><span class="tag">Hand finished</span></div></div>
+      </div>
+    </section>
+    <section class="sec tight">
+      <div class="eyebrow-line reveal">The collections</div>
+      <h2 class="reveal">Choose your category</h2>
+      <div class="cats">
+        ${["sarees","kurtis","salwar","panjabi","lehenga"].map((k,i)=>`<a class="cat reveal" href="#${k}"><span class="n">0${i+1}</span><span class="bn">${CATS[k].bn}</span><h3>${CATS[k].en}</h3></a>`).join("")}
+      </div>
+    </section>`},
+  craft:{scene:["dawn","rise"],title:"Our Craft",bn:"হাতের কাজ",sub:"Slow work, carried out with care.",kicker:"From poster to piece",
+    body:`
+    <section class="sec">
+      <div class="split">
+        <div class="reveal"><div class="eyebrow-line">Process</div><h2>Patience is the material.</h2>
+          <p class="lead">Embroidery and finishing follow the design poster exactly, so your piece matches the one you chose.</p>
+          <p class="muted">Because we work to order, we never rush a finish. The result is handwork that holds its shape and its character.</p></div>
+        <div class="reveal"><div class="art v2" style="height:420px"><div class="motif" style="width:130px;height:130px"></div><span class="tag">Handwork</span></div></div>
+      </div>
+      <ol class="timeline">
+        <li class="reveal"><div class="dot">1</div><h3>Design</h3><p>A poster sets the motif, colour and layout.</p></li>
+        <li class="reveal"><div class="dot">2</div><h3>Select</h3><p>Fabric and palette are chosen to match the design.</p></li>
+        <li class="reveal"><div class="dot">3</div><h3>Handwork</h3><p>Embroidery and finishing are done by hand.</p></li>
+        <li class="reveal"><div class="dot">4</div><h3>Deliver</h3><p>Checked, packed and sent to you.</p></li>
+      </ol>
+    </section>`},
+  order:{scene:["day","sun"],title:"How to Order",bn:"কীভাবে অর্ডার করবেন",sub:"Four simple steps, on WhatsApp.",kicker:"Ordering",
+    body:`
+    <section class="sec">
+      <div class="split">
+        <div class="reveal"><div class="eyebrow-line">Simple process</div><h2>From design to doorstep.</h2>
+          <p class="muted">Add designs to your list from any collection, then send them to us in one message. We will confirm the price and timing with you.</p>
+          <div class="cta-row" style="justify-content:flex-start"><a class="btn" href="#sarees">Start with sarees</a></div></div>
+        <ol class="steps reveal">
+          <li><span class="n">01</span><div><h3>Choose a design</h3><p>Pick from the numbered designs in any collection.</p></div></li>
+          <li><span class="n">02</span><div><h3>Send your list</h3><p>Message us on WhatsApp with the design numbers and your size.</p></div></li>
+          <li><span class="n">03</span><div><h3>Agree the details</h3><p>We confirm price and production time with you directly.</p></div></li>
+          <li><span class="n">04</span><div><h3>We make it</h3><p>Your piece is finished by hand and delivered.</p></div></li>
+        </ol>
+      </div>
+    </section>`},
+  about:{scene:["sunset","set"],title:"About",bn:"আমাদের সম্পর্কে",sub:"Where tradition meets everyday life.",kicker:"Our story",
+    body:`
+    <section class="sec">
+      <div class="split">
+        <div class="reveal"><div class="eyebrow-line">About Karu Chhaya</div><h2>Traditional handwork, shaped for today.</h2>
+          <p class="lead">We bring Bengali craft into clothes you can wear every day, and into the occasions that matter most.</p>
+          <p class="muted">Our focus is craft, honest agreements with each customer, and a personal relationship with the people we dress.</p></div>
+        <div class="reveal"><div class="art v4" style="height:420px"><div class="motif" style="width:130px;height:130px"></div><span class="tag">Made by hand</span></div></div>
+      </div>
+    </section>
+    <section class="band"><div class="sec">
+      <div class="quote-mark">“</div>
+      <p class="quote">Craft is the thread that connects every piece we make.</p>
+    </div></section>`},
+  contact:{scene:["night",""],title:"Contact",bn:"যোগাযোগ",sub:"We reply on WhatsApp.",kicker:"Get in touch",
+    body:`
+    <section class="sec">
+      <div class="split">
+        <div class="reveal"><div class="eyebrow-line">Talk to us</div><h2>The fastest way is WhatsApp.</h2>
+          <p class="muted">Share a design number, send a photo, or describe what you have in mind. We will reply personally.</p>
+          <div class="cta-row" style="justify-content:flex-start"><a class="btn" href="${wa("Hello Karu Chhaya")}" target="_blank" rel="noopener">Message on WhatsApp</a><a class="btn ghost" href="tel:+8801926863314">Call</a></div></div>
+        <div class="contact-card reveal">
+          <div class="contact-line"><span>WhatsApp</span><span>+880 1926-863314</span></div>
+          <div class="contact-line"><span>Orders</span><span>Made to order</span></div>
+          <div class="contact-line"><span>Pricing</span><span>Agreed with you</span></div>
+        </div>
+      </div>
+    </section>`}
+};
+
+function buildPage(id){
+  if (CATS[id]) return catPage(id);
+  const s = STATIC[id];
+  return `${hero(s.scene, s.title, s.sub, s.bn, s.kicker)}${s.body}`;
+}
+
+/* Mount */
+const app = document.getElementById("app");
+const menu = document.getElementById("menu");
+PAGES.forEach(p => {
+  const sec = document.createElement("section");
+  sec.className = "page"; sec.id = p.id;
+  sec.innerHTML = buildPage(p.id);
+  app.appendChild(sec);
+  const a = document.createElement("a");
+  a.href = "#" + p.id; a.textContent = p.label; a.dataset.id = p.id;
+  menu.appendChild(a);
+});
+
+app.addEventListener("click", e => {
+  const b = e.target.closest("[data-key]");
+  if (b) toggleDesign(b.dataset.key);
+});
+
+/* Word-by-word sway (keeps Bengali vowel signs intact) */
+document.querySelectorAll(".sway-w").forEach(el => {
+  const words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map((w,i) => `<span class="sway" style="animation-delay:${(i*0.4).toFixed(2)}s">${w}</span>`).join(" ");
+});
+
+/* Hero orb follows the cursor slightly */
+document.addEventListener("mousemove", e => {
+  const page = document.querySelector(".page.on");
+  if (!page) return;
+  const x = (e.clientX / innerWidth - .5) * 18, y = (e.clientY / innerHeight - .5) * 10;
+  page.querySelectorAll(".orb").forEach(o => o.style.transform = `translate(calc(-50% + ${x}px), ${y}px)`);
+});
+
+/* Header solid after scroll */
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), {passive:true});
+
+/* Scroll reveal */
+const io = new IntersectionObserver(entries => entries.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+}), {threshold:.15});
+function observeReveals(){ document.querySelectorAll(".page.on .reveal:not(.in)").forEach(el => io.observe(el)); }
+
+function route(){
+  const id = (location.hash || "#home").slice(1);
+  const target = PAGES.some(p => p.id === id) ? id : "home";
+  document.querySelectorAll(".page").forEach(s => s.classList.toggle("on", s.id === target));
+  document.querySelectorAll(".menu a").forEach(a => a.classList.toggle("on", a.dataset.id === target));
+  window.scrollTo({top:0, behavior:"instant"});
+  setTimeout(observeReveals, 60);
+  refreshTray();
+}
+addEventListener("hashchange", route);
+
+route();
+setTimeout(() => document.getElementById("intro").classList.add("done"), 1700);
+setTimeout(() => document.getElementById("intro")?.remove(), 3000);
+</script>
+</body>
+</html>
